@@ -1022,6 +1022,18 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/gapi.auth2@0.0.55":
+  version "0.0.55"
+  resolved "https://registry.yarnpkg.com/@types/gapi.auth2/-/gapi.auth2-0.0.55.tgz#88523c1b8d4866ea64ec9cbecb9ecc90b80b88aa"
+  integrity sha512-chmROsbo28jI5or0aRP8X3aBuWkq8jJHj75al/C0BhI/qum8v7XSxxQ9aLpA2ULPWgWSyh6orn9ZCaUSA4iQCA==
+  dependencies:
+    "@types/gapi" "*"
+
+"@types/gapi@*", "@types/gapi@0.0.41":
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/@types/gapi/-/gapi-0.0.41.tgz#c477ee4f0951c005869219fd10b456ae2bba437e"
+  integrity sha512-tmHO66z/f91JZCDqinj/nNvQEszsz/hBT4+MvCSKT5sDzl5Ld/oXZ8WaecCBjRLw2uWKUInUHM9MhEXWkOiNjw==
+
 "@types/glob@^7.1.1":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
@@ -8158,6 +8170,14 @@ vue-eslint-parser@^7.0.0:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^6.3.0"
+
+vue-gapi@^1.0.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/vue-gapi/-/vue-gapi-1.1.1.tgz#4ac82e1e359a369fc036e4eff36eb93912a03e4f"
+  integrity sha512-zEVE9A7y4tgpFUy4Q2GkjTC3nJRShfTmfeLiDw9Vc5w0CsUYCaxHP7AAqPcjRYtZhUEpYfKN22YW8N+oimm5CQ==
+  dependencies:
+    "@types/gapi" "0.0.41"
+    "@types/gapi.auth2" "0.0.55"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
