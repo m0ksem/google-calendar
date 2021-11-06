@@ -13,6 +13,9 @@
     "vue-gapi": "^1.0.0"
   },
   "devDependencies": {
+    "@types/gapi": "^0.0.41",
+    "@types/gapi.auth2": "^0.0.55",
+    "@types/gapi.calendar": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",

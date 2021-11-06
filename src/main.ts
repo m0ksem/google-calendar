@@ -4,10 +4,6 @@ import GApi from 'vue-gapi'
 
 Vue.config.productionTip = false
 
-declare global {
-  const gapi: any;
-}
-
 Vue.use(GApi, {
   apiKey: 'AIzaSyDPzLY6L36krINVPj-76dGFFKMX9w69au4',
   clientId: '804955345322-7vko1g67u1lmt317dqfchh24b2rn1d3d.apps.googleusercontent.com',

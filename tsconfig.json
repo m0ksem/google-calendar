@@ -13,7 +13,10 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "gapi",
+      "gapi.calendar",
+      "gapi.auth2"
     ],
     "paths": {
       "@/*": [

@@ -19,7 +19,7 @@ const normalizeRepeat = (repeat: GoogleCalendarEventRepeat | GoogleCalendarEvent
 
 const normalizeReminders = (reminders: GoogleCalendarEventReminder[] | undefined) => {
   if (!reminders) { 
-    return { useDefault: false }
+    return undefined
   }
 
   return {
@@ -28,8 +28,8 @@ const normalizeReminders = (reminders: GoogleCalendarEventReminder[] | undefined
   }
 }
 
-export const createEvent = (event: GoogleCalendarEvent, calendarId: string = 'primary'): Promise<any> => {
-  const normalizedEvent: Record<string, any> = {
+export const createEvent =  async (event: GoogleCalendarEvent, calendarId: string = 'primary'): Promise<any> => {
+  const normalizedEvent: gapi.client.calendar.EventInput = {
     ...event,
     start: normalizePeriod(event.start),
     end: normalizePeriod(event.end),
@@ -37,7 +37,7 @@ export const createEvent = (event: GoogleCalendarEvent, calendarId: string = 'pr
     reminders: normalizeReminders(event.reminders)
   }
 
-  return gapi.client.calendar.events.insert({
+  return await gapi.client.calendar.events.insert({
     calendarId,
     resource: normalizedEvent 
   })

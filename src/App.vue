@@ -8,7 +8,7 @@
 
 <script>
 import GApiGuard from "./components/GApiGuard.vue"
-import { createEvent, listEvents } from '@/api/google-calendar'
+import { createEvent, listEvents, isSignIn, login } from '@/api/google-calendar'
 
 export default {
   name: 'App',
@@ -17,7 +17,11 @@ export default {
 
   methods: {
     async login() {
-      await this.$gapi.login()
+      if (isSignIn()) {
+        return
+      }
+
+      console.log(await login())
     },
 
     async loadEvents() {
