@@ -1,16 +1,10 @@
 <template>
-<div class="container"> 
-<div class="card"> lfd;fdl;
-</div>      
-</div> 
+  <div class="card"> 
+    lfd;fdl;
+  </div>      
 </template>
 
 <style lang="scss" scoped>
-.container {
-  max-width: 1100px;
-  width: 100%;
-}
-
 .card {
 min-height: 90vh;
   width: 1100px;

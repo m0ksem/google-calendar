@@ -25,11 +25,12 @@ export default {
 
 <style lang="scss">
 .gapi-guard {
+  width: 100%;
+
   &--loading {
     position: fixed;
     height: 100vh;
     width: 100vh;
-    background: white;
   }
 }
 </style>

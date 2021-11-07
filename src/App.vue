@@ -1,10 +1,14 @@
 <template>
-  <GApiGuard id="app">
-    <MyCard></MyCard>
-    <!-- <MyButton @click="login">Login</MyButton>
-    <MyButton @click="loadEvents">Load</MyButton>
-    <MyButton @click="createSimpleEvent">createSimpleEvent</MyButton> -->
-  </GApiGuard>
+  <FluentBackground>
+    <GApiGuard id="app">
+      <MyContainer>
+        <MyCard></MyCard>
+        <!-- <MyButton @click="login">Login</MyButton>
+        <MyButton @click="loadEvents">Load</MyButton>
+        <MyButton @click="createSimpleEvent">createSimpleEvent</MyButton> -->        
+      </MyContainer>
+    </GApiGuard>    
+  </FluentBackground>
 </template>
 
 <script>
@@ -12,11 +16,13 @@ import GApiGuard from "./components/GApiGuard.vue"
 import { createEvent, listEvents, isSignIn, login } from '@/api/google-calendar'
 // import MyButton from "./components/MyButton.vue"
 import MyCard from "./components/MyCard.vue"
+import FluentBackground from "./components/FluentBackground.vue"
+import MyContainer from "./components/MyContainer.vue"
 
 export default {
   name: 'App',
 
-  components: { GApiGuard, MyCard},
+  components: { GApiGuard, MyCard, FluentBackground, MyContainer },
 
   methods: {
     async login() {
