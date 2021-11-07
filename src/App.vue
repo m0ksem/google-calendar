@@ -1,19 +1,22 @@
 <template>
   <GApiGuard id="app">
-    <button @click="login">Login</button>
-    <button @click="loadEvents">Load</button>
-    <button @click="createSimpleEvent">createSimpleEvent</button>
+    <MyCard></MyCard>
+    <!-- <MyButton @click="login">Login</MyButton>
+    <MyButton @click="loadEvents">Load</MyButton>
+    <MyButton @click="createSimpleEvent">createSimpleEvent</MyButton> -->
   </GApiGuard>
 </template>
 
 <script>
 import GApiGuard from "./components/GApiGuard.vue"
 import { createEvent, listEvents, isSignIn, login } from '@/api/google-calendar'
+// import MyButton from "./components/MyButton.vue"
+import MyCard from "./components/MyCard.vue"
 
 export default {
   name: 'App',
 
-  components: { GApiGuard },
+  components: { GApiGuard, MyCard},
 
   methods: {
     async login() {
@@ -44,12 +47,21 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@keyframes AnimationName {
+  0%{background-position:87% 0%}
+  50%{background-position:14% 100%}
+  100%{background-position:87% 0%}
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(213deg, #f7d1cd, #e8c2ca, #d1b3c4, #b392ac, #735d78);
+  background-size: 1000% 1000%;
+  animation: AnimationName 59s ease infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
 }
 </style>
