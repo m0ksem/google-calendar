@@ -2,7 +2,9 @@
   <FluentBackground>
     <GApiGuard id="app">
       <MyContainer>
-        <MyCard></MyCard>
+        <MyCard>
+          dsfsdfsdfd
+        </MyCard>
         <!-- <MyButton @click="login">Login</MyButton>
         <MyButton @click="loadEvents">Load</MyButton>
         <MyButton @click="createSimpleEvent">createSimpleEvent</MyButton> -->        
