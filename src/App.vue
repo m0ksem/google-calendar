@@ -53,10 +53,16 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
+
 @keyframes AnimationName {
   0%{background-position:87% 0%}
   50%{background-position:14% 100%}
   100%{background-position:87% 0%}
+}
+
+* {
+  font-family: 'Rubik', sans-serif;
 }
 
 body {
