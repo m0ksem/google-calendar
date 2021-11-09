@@ -12,6 +12,7 @@ textarea {
     border: 0px;
     border-radius: 10px 0px 0px 10px;
     box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8);
 
     &:focus {
     outline: solid 2px;
