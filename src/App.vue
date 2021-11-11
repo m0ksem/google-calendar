@@ -5,6 +5,10 @@
         <CreateEventView v-if="isSignedIn" @signout="signOut" />
         <LoginView v-else @login="login" />
       </MyContainer>
+
+      <template #loading>
+        <MyLoader />
+      </template>
     </GApiGuard>    
   </FluentBackground>
 </template>
@@ -14,13 +18,15 @@ import GApiGuard from "./components/GApiGuard.vue"
 import { createEvent, listEvents, isSignIn, login, signOut } from '@/api/google-calendar'
 import FluentBackground from "./components/FluentBackground.vue"
 import MyContainer from "./components/base/MyContainer.vue"
+import MyLoader from "./components/base/MyLoader.vue"
+
 import LoginView from './views/Login.vue'
 import CreateEventView from "./views/CreateEvent.vue"
 
 export default {
   name: 'App',
 
-  components: { GApiGuard, FluentBackground, MyContainer, LoginView, CreateEventView, },
+  components: { GApiGuard, FluentBackground, MyContainer, MyLoader, LoginView, CreateEventView, },
 
   data() {
     return {

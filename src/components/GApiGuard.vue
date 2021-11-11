@@ -3,7 +3,9 @@
     <slot></slot>
   </div>
   <div v-else class="gapi-guard gapi-guard--loading">
-    Loading GApi
+    <slot name="loading">
+      Loading GApi
+    </slot>
   </div>
 </template>
 
@@ -19,7 +21,7 @@ export default {
 
   beforeCreate() {
     this.$gapi.getGapiClient().then(() => { 
-      this.isGApiLoaded = true
+      this.isGApiLoaded = true // Comment this for infinite loading
       this.$emit('loaded')
     })
   },
@@ -33,7 +35,11 @@ export default {
   &--loading {
     position: fixed;
     height: 100vh;
-    width: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>
