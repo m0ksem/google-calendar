@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled"><slot></slot></button>  
+  <button :disabled="disabled" v-on:click="OnClick"><slot></slot></button>
 </template>
 
 <script>
@@ -7,10 +7,16 @@ export default {
   props: {
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-}
+
+  methods: {
+    OnClick() {
+      this.$emit("click");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -26,11 +32,11 @@ button {
   transition: all 0.2s ease-in-out;
 
   &:hover {
-background: #b07fdd;
+    background: #b07fdd;
   }
 
   &:disabled {
     background: red;
-  } 
+  }
 }
 </style>

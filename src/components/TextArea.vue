@@ -8,7 +8,7 @@ export default {
   props: {
     value: {
       type: String,
-    }
+    },
   },
 
   methods: {
@@ -19,17 +19,7 @@ export default {
     //   }
     // },
 
-    createEvent() {
-        const rows = this.value.split("\n");
-        const event = {
-            title: rows[0],
-            time: rows[1],
-            description: rows[2],
-            repeat: rows[3],
-            remind: rows[4]
-        }
-        console.log(event)
-    },
+
 
     OnInput(e) {
       this.$emit('input', e.target.value)

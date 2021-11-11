@@ -2,10 +2,14 @@
   <div class="card">
     <div class="row">
       <div class="col col--60">
-        <TextArea v-model="value"></TextArea>
+        <TextArea v-model="textareaValue"></TextArea>
       </div>
       <div class="col col--40">
-        <div><MyButton :disabled="IsDisabled">Save</MyButton></div>
+        <div>
+          <MyButton :disabled="IsDisabled" v-on:click="ButtonClick"
+            >Save</MyButton
+          >
+        </div>
         <div class="inst_wrap">
           <Instructions>fdfdffdfdfdfdfdfd</Instructions>
         </div>
@@ -26,13 +30,30 @@ export default {
 
   data() {
     return {
-      value: "",
+      textareaValue: "",
     };
   },
 
   computed: {
     IsDisabled() {
-      return this.value == "";
+      return this.textareaValue == "";
+    },
+  },
+
+  methods: {
+    createEvent() {
+      const rows = this.textareaValue.split("\n");
+      const event = {
+        title: rows[0],
+        time: rows[1],
+        description: rows[2],
+        repeat: rows[3],
+        remind: rows[4],
+      };
+      return event;
+    },
+    ButtonClick() {
+      console.log(this.createEvent());
     },
   },
 };
