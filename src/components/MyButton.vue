@@ -28,15 +28,22 @@ button {
   color: white;
   font-weight: 500;
   cursor: pointer;
-  border: 1px;
+  border: solid 2px;
+  border-color: #995dd1;
   transition: all 0.2s ease-in-out;
 
   &:hover {
     background: #b07fdd;
+    border: solid 2px;
+    border-color: #b07fdd;
   }
 
   &:disabled {
-    background: red;
+    background: rgb(214, 213, 213);
+    border: solid 2px;
+    border-color: rgb(185, 185, 185);
+    color: gray;
+    cursor: no-drop;
   }
 }
 </style>
