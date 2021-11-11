@@ -1,26 +1,16 @@
 <template>
-    <textarea :value="value" v-on:input="OnInput"></textarea>
-    <!-- <button v-on:click="createEvent" :disabled="isDisabled">Find words</button> -->
+    <textarea :value="value" v-on:input="OnInput" />
 </template>
 
 <script>
 export default {
+  name: 'MyTextArea',
+
   props: {
-    value: {
-      type: String,
-    },
+    value: { type: String },
   },
 
   methods: {
-    // findWords() {
-    //   const wordsarr = this.value.split(" ");
-    //   for (let i = 0; i < wordsarr.length; i++) {
-    //     console.log(wordsarr[i]);
-    //   }
-    // },
-
-
-
     OnInput(e) {
       this.$emit('input', e.target.value)
     }

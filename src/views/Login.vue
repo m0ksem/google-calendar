@@ -13,10 +13,12 @@
 </template>
 
 <script>
-import MyButton from "../components/MyButton.vue"
-import MyCard from "../components/MyCard.vue"
+import MyButton from "../components/base/MyButton.vue"
+import MyCard from "../components/base/MyCard.vue"
 
 export default {
+  name: 'LoginView',
+
   components: { MyButton, MyCard },
 
   methods: {

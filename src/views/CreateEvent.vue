@@ -9,7 +9,7 @@
           <MyButton :disabled="IsDisabled" v-on:click="ButtonClick">Save</MyButton>
           <MyButton v-on:click="Logout">Log out</MyButton>
         </div>
-        <div class="inst_wrap">
+        <div class="instructions-wrapper">
           <Instructions>fdfdffdfdfdfdfdfd</Instructions>
         </div>
       </div>
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import MyCard from "../components/MyCard.vue"
-import TextArea from "../components/TextArea.vue";
-import MyButton from "../components/MyButton.vue";
+import MyCard from "../components/base/MyCard.vue"
+import TextArea from "../components/base/MyTextArea.vue";
+import MyButton from "../components/base/MyButton.vue";
 import Instructions from "../components/Instructions.vue";
 
 export default {
-  name: "card",
+  name: "CreateEventView",
 
   components: { TextArea, MyButton, Instructions, MyCard },
 
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.inst_wrap {
+.instructions-wrapper {
   width: 100%;
   height: 100%;
   padding-top: 20px;

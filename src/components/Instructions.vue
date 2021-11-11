@@ -1,11 +1,11 @@
 <template>
-    <div class="inst">
+    <div class="instructions">
         <slot></slot>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.inst {
+.instructions {
     width: 100%;
     height: 100%;
     padding: 10px;

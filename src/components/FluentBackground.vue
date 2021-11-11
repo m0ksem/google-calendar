@@ -49,12 +49,6 @@ void main(){
 
 
 export default {
-  data() {
-    return {
-      // Store 
-    }
-  },
-
   mounted() {
     const canvas = this.$refs.canvas
 

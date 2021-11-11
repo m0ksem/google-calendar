@@ -13,10 +13,9 @@
 import GApiGuard from "./components/GApiGuard.vue"
 import { createEvent, listEvents, isSignIn, login, signOut } from '@/api/google-calendar'
 import FluentBackground from "./components/FluentBackground.vue"
-import MyContainer from "./components/MyContainer.vue"
+import MyContainer from "./components/base/MyContainer.vue"
 import LoginView from './views/Login.vue'
 import CreateEventView from "./views/CreateEvent.vue"
-
 
 export default {
   name: 'App',

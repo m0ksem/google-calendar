@@ -1,5 +1,7 @@
 <template>
-  <button :disabled="disabled" v-on:click="OnClick"><slot></slot></button>
+  <button :disabled="disabled" v-on:click="OnClick">
+    <slot />
+  </button>
 </template>
 
 <script>
