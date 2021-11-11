@@ -1,6 +1,17 @@
 <template>
-  <button><slot></slot></button>  
+  <button :disabled="disabled"><slot></slot></button>  
 </template>
+
+<script>
+export default {
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 button {
@@ -17,5 +28,9 @@ button {
   &:hover {
 background: #b07fdd;
   }
+
+  &:disabled {
+    background: red;
+  } 
 }
 </style>

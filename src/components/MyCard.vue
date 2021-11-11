@@ -2,11 +2,13 @@
   <div class="card">
     <div class="row">
       <div class="col col--60">
-        <TextArea></TextArea>
+        <TextArea v-model="value"></TextArea>
       </div>
       <div class="col col--40">
-        <div><MyButton>Save</MyButton></div>
-        <div class="inst_wrap"><Instructions>fdfdffdfdfdfdfdfd</Instructions></div>
+        <div><MyButton :disabled="IsDisabled">Save</MyButton></div>
+        <div class="inst_wrap">
+          <Instructions>fdfdffdfdfdfdfdfd</Instructions>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +23,18 @@ export default {
   name: "card",
 
   components: { TextArea, MyButton, Instructions },
+
+  data() {
+    return {
+      value: "",
+    };
+  },
+
+  computed: {
+    IsDisabled() {
+      return this.value == "";
+    },
+  },
 };
 </script>
 
