@@ -1,64 +1,8 @@
 <template>
   <div class="card">
-    <div class="row">
-      <div class="col col--60">
-        <TextArea v-model="textareaValue"></TextArea>
-      </div>
-      <div class="col col--40">
-        <div>
-          <MyButton :disabled="IsDisabled" v-on:click="ButtonClick"
-            >Save</MyButton
-          >
-        </div>
-        <div class="inst_wrap">
-          <Instructions>fdfdffdfdfdfdfdfd</Instructions>
-        </div>
-      </div>
-    </div>
+    <slot></slot>
   </div>
 </template>
-
-<script>
-import TextArea from "./TextArea.vue";
-import MyButton from "./MyButton.vue";
-import Instructions from "./Instructions.vue";
-
-export default {
-  name: "card",
-
-  components: { TextArea, MyButton, Instructions },
-
-  data() {
-    return {
-      textareaValue: "",
-    };
-  },
-
-  computed: {
-    IsDisabled() {
-      return this.textareaValue == "";
-    },
-  },
-
-  methods: {
-    createEvent() {
-      const rows = this.textareaValue.split("\n");
-      const event = {
-        title: rows[0],
-        time: rows[1],
-        description: rows[2],
-        repeat: rows[3],
-        remind: rows[4],
-      };
-      return event;
-    },
-    ButtonClick() {
-      console.log(this.createEvent());
-    },
-  },
-};
-</script>
-
 
 <style lang="scss" scoped>
 .card {
@@ -70,36 +14,5 @@ export default {
   box-shadow: 5px 5px 12px -9px rgba(0, 0, 0, 0.67);
   padding: 20px;
   box-sizing: border-box;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  margin: 0 -10px;
-}
-
-.col {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 10px;
-  box-sizing: border-box;
-
-  &--60 {
-    width: 60%;
-  }
-
-  &--40 {
-    width: 40%;
-  }
-}
-
-.inst_wrap {
-  width: 100%;
-  height: 100%;
-  padding-top: 20px;
 }
 </style>

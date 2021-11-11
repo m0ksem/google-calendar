@@ -18,7 +18,10 @@ export default {
   },
 
   beforeCreate() {
-    this.$gapi.getGapiClient().then(() => { this.isGApiLoaded = true })
+    this.$gapi.getGapiClient().then(() => { 
+      this.isGApiLoaded = true
+      this.$emit('loaded')
+    })
   },
 }
 </script>

@@ -1,11 +1,9 @@
 <template>
   <FluentBackground>
-    <GApiGuard id="app">
-      <MyContainer>
-        <MyCard></MyCard>
-        <!-- <MyButton @click="login">Login</MyButton>
-        <MyButton @click="loadEvents">Load</MyButton>
-        <MyButton @click="createSimpleEvent">createSimpleEvent</MyButton> -->        
+    <GApiGuard @loaded="onGApiLoaded">
+      <MyContainer>        
+        <CreateEventView v-if="isSignedIn" @signout="signOut" />
+        <LoginView v-else @login="login" />
       </MyContainer>
     </GApiGuard>    
   </FluentBackground>
@@ -13,24 +11,47 @@
 
 <script>
 import GApiGuard from "./components/GApiGuard.vue"
-import { createEvent, listEvents, isSignIn, login } from '@/api/google-calendar'
-// import MyButton from "./components/MyButton.vue"
-import MyCard from "./components/MyCard.vue"
+import { createEvent, listEvents, isSignIn, login, signOut } from '@/api/google-calendar'
 import FluentBackground from "./components/FluentBackground.vue"
 import MyContainer from "./components/MyContainer.vue"
+import LoginView from './views/Login.vue'
+import CreateEventView from "./views/CreateEvent.vue"
+
 
 export default {
   name: 'App',
 
-  components: { GApiGuard, MyCard, FluentBackground, MyContainer },
+  components: { GApiGuard, FluentBackground, MyContainer, LoginView, CreateEventView, },
+
+  data() {
+    return {
+      isSignedIn: false,
+    }
+  },
 
   methods: {
+    async onGApiLoaded() {
+      this.isSignedIn = await isSignIn()
+    },
+
     async login() {
-      if (isSignIn()) {
+      if (await isSignIn()) {
         return
       }
 
-      console.log(await login())
+     await login()
+
+      this.isSignedIn = await isSignIn()
+    },
+
+    async signOut() {
+      if (!(await isSignIn())) {
+        return 
+      }
+
+      await signOut()
+
+      this.isSignedIn = await isSignIn()
     },
 
     async loadEvents() {
@@ -52,7 +73,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
 
 @keyframes AnimationName {
@@ -75,5 +96,30 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  margin: 0 -10px;
+}
+
+.col {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  &--60 {
+    width: 60%;
+  }
+
+  &--40 {
+    width: 40%;
+  }
 }
 </style>
