@@ -6,7 +6,9 @@
       </div>
       <div class="col col--40">
         <div>
-          <MyButton :disabled="IsDisabled" v-on:click="ButtonClick">Save</MyButton>
+          <MyButton :disabled="IsDisabled" v-on:click="ButtonClick"
+            >Save</MyButton
+          >
           <MyButton v-on:click="Logout">Log out</MyButton>
         </div>
         <div class="instructions-wrapper">
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import MyCard from "../components/base/MyCard.vue"
+import MyCard from "../components/base/MyCard.vue";
 import TextArea from "../components/base/MyTextArea.vue";
 import MyButton from "../components/base/MyButton.vue";
 import Instructions from "../components/Instructions.vue";
@@ -30,7 +32,10 @@ export default {
 
   data() {
     return {
-      textareaValue: "",
+      textareaValue: `Пара групповой динамики
+11:30 - 12:45 13.10.2021
+Ссылка на пару http://aaaaaaad.sf
+repeat: Weekly`,
     };
   },
 
@@ -41,23 +46,53 @@ export default {
   },
 
   methods: {
+    createDate(date, time) {
+      const datesplit = date.split(".")
+      const year = datesplit[2];
+      const month = datesplit[1];
+      const day = datesplit[0];
+
+      const timesplit = time.split(":")
+      const hours = timesplit[0];
+      const minutes = timesplit[1];
+
+      return new Date(year, month, day, hours, minutes);
+    },
+
     createEvent() {
       const rows = this.textareaValue.split("\n");
+
+      const timeanddate = rows[1].split(" ");
+      const startTime = timeanddate[0];
+      let endTime = timeanddate[2];
+      let date = timeanddate[3];
+
+      if (endTime == undefined) {
+        endTime = startTime;
+        date = timeanddate[1];
+      }
+
       const event = {
-        title: rows[0],
-        time: rows[1],
+        summary: rows[0],
+        start: {
+          dateTime: this.createDate(date, startTime)
+        },
+        end: {
+         dateTime: this.createDate(date, endTime)
+        },
         description: rows[2],
         repeat: rows[3],
-        remind: rows[4],
+        reminders: rows[4],
       };
+
       return event;
     },
     ButtonClick() {
       console.log(this.createEvent());
     },
     Logout() {
-      this.$emit('signout');
-    }
+      this.$emit("signout");
+    },
   },
 };
 </script>
