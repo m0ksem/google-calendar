@@ -11,8 +11,9 @@
           >
           <MyButton v-on:click="Logout">Log out</MyButton>
         </div>
+        <MyOptionsList v-model="currentCalendar" :options="options" textKey="summary"></MyOptionsList>
         <div class="instructions-wrapper">
-          <Instructions>fdfdffdfdfdfdfdfd</Instructions>
+          <Instructions></Instructions>
         </div>
       </div>
     </div>
@@ -23,25 +24,30 @@
 import MyCard from "../components/base/MyCard.vue";
 import TextArea from "../components/base/MyTextArea.vue";
 import MyButton from "../components/base/MyButton.vue";
+import MyOptionsList from "../components/base/MyOptionsList.vue";
 import Instructions from "../components/Instructions.vue";
-import { getPrettyCalendarList } from '../api/google-calendar'
+import { getPrettyCalendarList } from "../api/google-calendar";
 
 export default {
   name: "CreateEventView",
 
-  components: { TextArea, MyButton, Instructions, MyCard },
+  components: { TextArea, MyButton, MyOptionsList, MyCard, Instructions },
 
   data() {
     return {
       textareaValue: `Пара групповой динамики
-11:30 - 12:45 13.10.2021
+1:30 - 12:45 13.10.2021
 Ссылка на пару http://aaaaaaad.sf
 repeat: Weekly`,
+
+      currentCalendar: null,
+
+      options: [],
     };
   },
 
   async mounted() {
-    console.log(await getPrettyCalendarList())
+    this.options = await getPrettyCalendarList();
   },
 
   computed: {
@@ -52,12 +58,12 @@ repeat: Weekly`,
 
   methods: {
     createDate(date, time) {
-      const datesplit = date.split(".")
+      const datesplit = date.split(".");
       const year = datesplit[2];
       const month = datesplit[1];
       const day = datesplit[0];
 
-      const timesplit = time.split(":")
+      const timesplit = time.split(":");
       const hours = timesplit[0];
       const minutes = timesplit[1];
 
@@ -80,10 +86,10 @@ repeat: Weekly`,
       const event = {
         summary: rows[0],
         start: {
-          dateTime: this.createDate(date, startTime)
+          dateTime: this.createDate(date, startTime),
         },
         end: {
-         dateTime: this.createDate(date, endTime)
+          dateTime: this.createDate(date, endTime),
         },
         description: rows[2],
         repeat: rows[3],
@@ -107,5 +113,9 @@ repeat: Weekly`,
   width: 100%;
   height: 100%;
   padding-top: 20px;
+}
+
+.my-button {
+  margin: 0 6px;
 }
 </style>
