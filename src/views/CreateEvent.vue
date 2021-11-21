@@ -24,6 +24,7 @@ import MyCard from "../components/base/MyCard.vue";
 import TextArea from "../components/base/MyTextArea.vue";
 import MyButton from "../components/base/MyButton.vue";
 import Instructions from "../components/Instructions.vue";
+import { getPrettyCalendarList } from '../api/google-calendar'
 
 export default {
   name: "CreateEventView",
@@ -37,6 +38,10 @@ export default {
 Ссылка на пару http://aaaaaaad.sf
 repeat: Weekly`,
     };
+  },
+
+  async mounted() {
+    console.log(await getPrettyCalendarList())
   },
 
   computed: {

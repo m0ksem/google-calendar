@@ -2,6 +2,9 @@
   <div v-if="isGApiLoaded" class="gapi-guard">
     <slot></slot>
   </div>
+  <div v-else-if="error" class="gapi-guard gapi-guard--error">
+    {{ error }}
+  </div>
   <div v-else class="gapi-guard gapi-guard--loading">
     <slot name="loading">
       Loading GApi
@@ -16,6 +19,7 @@ export default {
   data() {
     return {
       isGApiLoaded: false,
+      error: null
     }
   },
 
@@ -23,6 +27,8 @@ export default {
     this.$gapi.getGapiClient().then(() => { 
       this.isGApiLoaded = true // Comment this for infinite loading
       this.$emit('loaded')
+    }).catch((error) => {
+      this.error = error
     })
   },
 }
