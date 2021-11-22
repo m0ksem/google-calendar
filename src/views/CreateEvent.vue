@@ -42,8 +42,7 @@ export default {
       textareaValue: `Пара групповой динамики
 1:30-12:45 13.10.2021
 Ссылка на пару http://aaaaaaad.sf
-repeat: Weekly
-reminder: 2h`,
+repeat: Weekly 1 13.10.2022`,
 
       currentCalendar: null,
 
@@ -93,7 +92,7 @@ reminder: 2h`,
       const hours = timesplit[0];
       const minutes = timesplit[1];
 
-      return new Date(year, month - 1, day + 1, hours, minutes);
+      return new Date(year, month - 1, day, hours, minutes);
     },
 
     createRepeat(text) {
@@ -126,7 +125,7 @@ reminder: 2h`,
     // },
 
     createEvents() {
-      const eventTexts = this.textareaValue.split('\n\n')
+      const eventTexts = this.textareaValue.split('\n\n\n')
 
       const events = eventTexts.map((text) => this.createEvent(text))
 
@@ -155,7 +154,9 @@ reminder: 2h`,
     },
 
     async ButtonClick() {
-      const r = await Promise.all(this.createEvents().map(async (e) => {
+      const events = this.createEvents()
+
+      const r = await Promise.all(events.map(async (e) => {
         return createEvent(e, this.currentCalendar)
       }))
 
