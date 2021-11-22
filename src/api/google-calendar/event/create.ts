@@ -14,7 +14,18 @@ const safeArray = <T>(o: T | T[]): T[] => Array.isArray(o) ? o : [o]
 
 const normalizeRepeat = (repeat: GoogleCalendarEventRepeat | GoogleCalendarEventRepeat[]) => {
   return safeArray(repeat)
-    .map((rule) => `RRULE:FREQ=${rule.frequency};COUNT=${rule.count || 1}`)
+    .map((rule) => {
+      const rules = [
+        `FREQ=${rule.frequency}`, 
+        `INTERVAL=${rule.interval || 1}`
+      ]
+
+      if (rule.until) {
+        rules.push(`UNTIL=${rule.until.toISOString().slice(0,10).replace(/-/g,"")}`)
+      }
+
+      return `RRULE:${rules.join(';')}`
+    })
 }
 
 const normalizeReminders = (reminders: GoogleCalendarEventReminder[] | undefined) => {

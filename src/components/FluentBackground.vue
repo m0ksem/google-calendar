@@ -112,7 +112,7 @@ export default {
 
     const draw = () => {
       thisFrame = Date.now();
-      time += (thisFrame - lastFrame) / 3000;	
+      time += (thisFrame - lastFrame) / 1000;	
       lastFrame = thisFrame;
 
       this.gl.uniform1f(timeHandle, time);

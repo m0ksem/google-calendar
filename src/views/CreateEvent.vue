@@ -11,7 +11,11 @@
           >
           <MyButton v-on:click="Logout">Log out</MyButton>
         </div>
-        <MyOptionsList v-model="currentCalendar" :options="options" textKey="summary"></MyOptionsList>
+        <MyOptionsList
+          v-model="currentCalendar"
+          :options="options"
+          textKey="summary"
+        ></MyOptionsList>
         <div class="instructions-wrapper">
           <Instructions></Instructions>
         </div>
@@ -26,7 +30,7 @@ import TextArea from "../components/base/MyTextArea.vue";
 import MyButton from "../components/base/MyButton.vue";
 import MyOptionsList from "../components/base/MyOptionsList.vue";
 import Instructions from "../components/Instructions.vue";
-import { getPrettyCalendarList } from "../api/google-calendar";
+import { getPrettyCalendarList, createEvent } from "../api/google-calendar";
 
 export default {
   name: "CreateEventView",
@@ -36,9 +40,10 @@ export default {
   data() {
     return {
       textareaValue: `Пара групповой динамики
-1:30 - 12:45 13.10.2021
+1:30-12:45 13.10.2021
 Ссылка на пару http://aaaaaaad.sf
-repeat: Weekly`,
+repeat: Weekly
+reminder: 2h`,
 
       currentCalendar: null,
 
@@ -57,6 +62,27 @@ repeat: Weekly`,
   },
 
   methods: {
+    parseDate(date) {
+      const datesplit = date.split(".");
+      const year = datesplit[2];
+      const month = datesplit[1];
+      const day = datesplit[0];
+
+      return new Date(year, month - 1, day + 1)
+    },
+
+    parseDateRow(text) {
+      const [time, date] = text.split(" ");
+
+      const [start, end] = time.split("-")
+
+      return {
+        start,
+        end: end || start,
+        date: date || new Date().toLocaleDateString('ru-RU')
+      }
+    },
+
     createDate(date, time) {
       const datesplit = date.split(".");
       const year = datesplit[2];
@@ -67,54 +93,80 @@ repeat: Weekly`,
       const hours = timesplit[0];
       const minutes = timesplit[1];
 
-      return new Date(year, month, day, hours, minutes);
+      return new Date(year, month - 1, day + 1, hours, minutes);
     },
 
-    createEvent() {
-      const rows = this.textareaValue.split("\n");
+    createRepeat(text) {
+      const r = text.replace("repeat: ", "");
+      const [frequency, count, until] = r.split(" ");
 
-      const timeanddate = rows[1].split(" ");
-      const startTime = timeanddate[0];
-      let endTime = timeanddate[2];
-      let date = timeanddate[3];
-
-      if (endTime == undefined) {
-        endTime = startTime;
-        date = timeanddate[1];
+      if (until) {
+        return { 
+          frequency: frequency.toUpperCase(), 
+          interval: count || 1,
+          until: this.parseDate(until)
+        };
       }
+
+      return { frequency: frequency.toUpperCase(), count: count || 1 };
+    },
+
+    // createReminder(text) {
+    //   // const t = text.replace("reminder: ", "");
+
+    //   // const letterMap = {
+    //   //   s: 1/60,
+    //   //   m: 1,
+    //   //   h: 60,
+    //   //   d: 60 * 24,
+    //   //   w: 60 * 24 * 7,
+    //   // }
+
+
+    // },
+
+    createEvents() {
+      const eventTexts = this.textareaValue.split('\n\n')
+
+      const events = eventTexts.map((text) => this.createEvent(text))
+
+      return events
+    },
+
+    createEvent(text) {
+      const rows = text.split("\n");
+
+      const { start, end, date } = this.parseDateRow(rows[1])
 
       const event = {
         summary: rows[0],
         start: {
-          dateTime: this.createDate(date, startTime),
+          dateTime: this.createDate(date, start),
         },
         end: {
-          dateTime: this.createDate(date, endTime),
+          dateTime: this.createDate(date, end),
         },
         description: rows[2],
         repeat: this.createRepeat(rows[3]),
-        reminders: rows[4],
+        // reminders: rows[4],
       };
 
       return event;
     },
 
-    ButtonClick() {
-      console.log(this.createEvent());
+    async ButtonClick() {
+      const r = await Promise.all(this.createEvents().map(async (e) => {
+        return createEvent(e, this.currentCalendar)
+      }))
+
+      console.log(r);
     },
 
     Logout() {
       this.$emit("signout");
     },
 
-    createRepeat(text) {
-      const r = text.replace('repeat: ', '');
-      const spltRepeat = r.split(" ");
-      if(spltRepeat[1] != undefined) {
-       return {frequency: spltRepeat[0], count: spltRepeat[1]}
-      }
-      return {frequency: spltRepeat[0], count: 1}
-    }
+
   },
 };
 </script>

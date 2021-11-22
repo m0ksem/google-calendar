@@ -1,6 +1,7 @@
 export interface GoogleCalendarEventRepeat {
   frequency: 'SECONDLY' | 'MINUTELY' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY',
-  count: number
+  interval: number,
+  until: Date,
 }
 
 export interface GoogleCalendarEventPeriod {
