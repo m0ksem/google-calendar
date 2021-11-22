@@ -92,18 +92,29 @@ repeat: Weekly`,
           dateTime: this.createDate(date, endTime),
         },
         description: rows[2],
-        repeat: rows[3],
+        repeat: this.createRepeat(rows[3]),
         reminders: rows[4],
       };
 
       return event;
     },
+
     ButtonClick() {
       console.log(this.createEvent());
     },
+
     Logout() {
       this.$emit("signout");
     },
+
+    createRepeat(text) {
+      const r = text.replace('repeat: ', '');
+      const spltRepeat = r.split(" ");
+      if(spltRepeat[1] != undefined) {
+       return {frequency: spltRepeat[0], count: spltRepeat[1]}
+      }
+      return {frequency: spltRepeat[0], count: 1}
+    }
   },
 };
 </script>
