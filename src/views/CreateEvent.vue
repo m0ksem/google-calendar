@@ -17,7 +17,9 @@
           textKey="summary"
         ></MyOptionsList>
         <div class="instructions-wrapper">
-          <Instructions></Instructions>
+          <Instructions>
+            <VueMarkdown :source="instruction"></VueMarkdown>
+          </Instructions>
         </div>
       </div>
     </div>
@@ -25,17 +27,19 @@
 </template>
 
 <script>
+import VueMarkdown from 'vue-markdown-render'
 import MyCard from "../components/base/MyCard.vue";
 import TextArea from "../components/base/MyTextArea.vue";
 import MyButton from "../components/base/MyButton.vue";
 import MyOptionsList from "../components/base/MyOptionsList.vue";
 import Instructions from "../components/Instructions.vue";
 import { getPrettyCalendarList, createEvent } from "../api/google-calendar";
+import InstructionsMD from '../assets/instruction.md'
 
 export default {
   name: "CreateEventView",
 
-  components: { TextArea, MyButton, MyOptionsList, MyCard, Instructions },
+  components: { TextArea, MyButton, MyOptionsList, MyCard, Instructions, VueMarkdown },
 
   data() {
     return {
@@ -48,6 +52,10 @@ repeat: Weekly 1 13.10.2022`,
 
       options: [],
     };
+  },
+
+  beforeCreate() {
+    this.instruction = InstructionsMD
   },
 
   async mounted() {
