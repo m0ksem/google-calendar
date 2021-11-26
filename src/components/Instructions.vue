@@ -14,5 +14,8 @@
     border-radius: 0px 10px 10px 0px;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.6);
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #292929
 }
 </style>

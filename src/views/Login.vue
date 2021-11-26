@@ -6,7 +6,7 @@
       <p>Please, login</p>
 
       <div class="footer">
-        <MyButton @click="login"> LOGIN </MyButton>
+        <MyButton @click="login" color="#4285f4"> Login with Google </MyButton>
       </div>
     </div>
   </MyCard>

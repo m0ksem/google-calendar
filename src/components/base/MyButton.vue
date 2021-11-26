@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled" v-on:click="OnClick" class="my-button">
+  <button :disabled="disabled" v-on:click="OnClick" class="my-button" :style="{ background: color, 'border-color': color }">
     <slot />
   </button>
 </template>
@@ -11,6 +11,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    color: { 
+      type: String,
+      default: "#995dd1"
+    }
   },
 
   methods: {
@@ -26,18 +30,15 @@ button {
   border-radius: 9px;
   padding: 10px 30px;
   height: 100%;
-  background: #995dd1;
   color: white;
   font-weight: 500;
   cursor: pointer;
   border: solid 2px;
-  border-color: #995dd1;
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background: #b07fdd;
+    opacity: 0.9;
     border: solid 2px;
-    border-color: #b07fdd;
   }
 
   &:disabled {

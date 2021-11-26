@@ -6,10 +6,10 @@
       </div>
       <div class="col col--40">
         <div>
-          <MyButton :disabled="IsDisabled" v-on:click="ButtonClick"
-            >Save</MyButton
-          >
-          <MyButton v-on:click="Logout">Log out</MyButton>
+          <MyButton :disabled="IsDisabled" v-on:click="ButtonClick">
+            Create events
+          </MyButton>
+          <MyButton v-on:click="Logout" color="#543c6b">Log out</MyButton>
         </div>
         <MyOptionsList
           v-model="currentCalendar"
@@ -43,10 +43,7 @@ export default {
 
   data() {
     return {
-      textareaValue: `Пара групповой динамики
-1:30-12:45 13.10.2021
-Ссылка на пару http://aaaaaaad.sf
-repeat: Weekly 1 13.10.2022`,
+      textareaValue: ``,
 
       currentCalendar: null,
 
@@ -185,6 +182,8 @@ repeat: Weekly 1 13.10.2022`,
   width: 100%;
   height: 100%;
   padding-top: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .my-button {
