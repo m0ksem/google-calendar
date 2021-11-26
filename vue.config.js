@@ -1,4 +1,7 @@
 module.exports = {
+  publicPath: '/google-calendar/',
+  outputDir: 'docs',
+
   configureWebpack: {
     module: {
       rules: [
