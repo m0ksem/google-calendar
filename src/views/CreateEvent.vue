@@ -15,6 +15,7 @@
           v-model="currentCalendar"
           :options="options"
           textKey="summary"
+          placeholder="Select a calendar"
         ></MyOptionsList>
         <div class="instructions-wrapper">
           <Instructions>
