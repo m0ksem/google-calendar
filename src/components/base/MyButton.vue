@@ -42,9 +42,9 @@ button {
   }
 
   &:disabled {
-    background: rgb(214, 213, 213);
+    background: rgb(214, 213, 213) !important;
     border: solid 2px;
-    border-color: rgb(185, 185, 185);
+    border-color: rgb(185, 185, 185) !important;
     color: gray;
     cursor: no-drop;
   }
