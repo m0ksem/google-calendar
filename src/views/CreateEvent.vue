@@ -150,9 +150,8 @@ export default {
         end: {
           dateTime: this.createDate(date, end),
         },
-        description: rows[2],
-        repeat: this.createRepeat(rows[3]),
-        // reminders: rows[4],
+        description: rows[2] ? rows[2] : undefined,
+        repeat: rows[3] ? this.createRepeat(rows[3]) : undefined,
       };
 
       return event;
