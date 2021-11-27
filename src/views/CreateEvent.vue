@@ -140,6 +140,9 @@ export default {
     createEvent(text) {
       const rows = text.split("\n");
 
+      if (!rows[0]) { throw new Error('Event name required') }
+      if (!rows[1]) { throw new Error('Event date required') }
+
       const { start, end, date } = this.parseDateRow(rows[1])
 
       const event = {
@@ -163,6 +166,8 @@ export default {
       const r = await Promise.all(events.map(async (e) => {
         return createEvent(e, this.currentCalendar)
       }))
+
+      this.$toast.open('Events created!')
 
       console.log(r);
     },

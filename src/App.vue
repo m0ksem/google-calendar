@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import GApiGuard from "./components/GApiGuard.vue"
 import { createEvent, listEvents, isSignIn, login, signOut } from '@/api/google-calendar'
 import FluentBackground from "./components/FluentBackground.vue"
@@ -32,6 +33,14 @@ export default {
     return {
       isSignedIn: false,
     }
+  },
+
+  mounted() {
+    window.onerror = this.onError
+    window.onunhandledrejection = this.onError
+
+    Vue.config.warnHandler = this.onError
+    Vue.config.errorHandler = this.onError
   },
 
   methods: {
@@ -73,6 +82,14 @@ export default {
           count: 21
         }
       })
+    },
+
+    onError(e) {
+      this.$toast.open({
+          message: 'Something went wrong! Look into console to get more information.',
+          type: 'error',
+      });
+      console.error(e)
     }
   },
 }

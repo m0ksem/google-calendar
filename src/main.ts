@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import GApi from 'vue-gapi'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 Vue.config.productionTip = false
 
@@ -10,6 +12,8 @@ Vue.use(GApi, {
   discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
   scope: 'https://www.googleapis.com/auth/calendar',
 })
+
+Vue.use(VueToast)
 
 new Vue({
   render: h => h(App),
