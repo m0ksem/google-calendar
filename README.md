@@ -1,4 +1,4 @@
-# google-calendar-events
+# google-calendar
 
 ## Project setup
 ```
@@ -10,15 +10,14 @@ yarn install
 yarn serve
 ```
 
-### Compiles and minifies for production
+### Deploy
+
+Site hosted via Github Pages from docs folder. Build creates in docs folder instead of dist.
 ```
 yarn build
+git push
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### User instruction
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+User instruction provided in `src/assets/instruction.md`
