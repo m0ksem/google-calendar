@@ -18,3 +18,16 @@ Vue.use(VueToast)
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+
+
+Vue.mixin({
+  mounted() {
+    if (document && this.$options.pageTitle) {
+      document.title = this.$options.pageTitle
+    }
+
+    if (document && this.$options.pageSubtitle) {
+      document.title = `Calendar - ${this.$options.pageSubtitle}`
+    }
+  }
+} as any)

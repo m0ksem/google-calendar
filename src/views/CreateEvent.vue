@@ -40,6 +40,8 @@ import InstructionsMD from '../assets/instruction.md'
 export default {
   name: "CreateEventView",
 
+  pageSubtitle: 'Create Event',
+
   components: { TextArea, MyButton, MyOptionsList, MyCard, Instructions, VueMarkdown },
 
   data() {

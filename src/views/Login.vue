@@ -3,7 +3,7 @@
     <div class="col">
       <h1>Welcome!</h1>
 
-      <p>Please, login</p>
+      <p>This app allows you to create Google Calendar events using only keyboard.</p>
 
       <div class="footer">
         <MyButton @click="login" color="#4285f4"> Login with Google </MyButton>
@@ -18,6 +18,8 @@ import MyCard from "../components/base/MyCard.vue"
 
 export default {
   name: 'LoginView',
+
+  pageSubtitle: 'Login',
 
   components: { MyButton, MyCard },
 
