@@ -188,7 +188,6 @@ export default {
   height: 100%;
   padding-top: 20px;
   overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .my-button {

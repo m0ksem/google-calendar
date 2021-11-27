@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .instructions {
     width: 100%;
     height: 100%;
@@ -15,7 +15,11 @@
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.6);
     overflow-y: auto;
-    overflow-x: hidden;
-    color: #292929
+    color: #292929;
+
+    code {
+        font-family: 'Consolas', 'Times New Roman';
+        color: #252525;
+    }
 }
 </style>
