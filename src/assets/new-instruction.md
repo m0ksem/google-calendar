@@ -1,6 +1,6 @@
 # Instruction
 
-Select calendar above
+Select calendar above where event should be created.
 
 ## Usage
 
@@ -10,17 +10,17 @@ Simply write title in quotes, time and date. For example:
 ```
 
 ### Repeat
-- Repeat weekly
+- Repeat weekly.
 ```
 "Go to shop" 12:40 24.1.22 repeat weekly
 ```
 
-- Repeat until some date
+- Repeat until some date.
 ```
 "Go to shop" 12:40 24.1.22 repeat weekly until 24.12.22
 ```
 
-- Repeat each second week
+- Repeat each second week.
 ```
 "Go to shop" 12:40 24.1.22 repeat weekly 2
 ```
@@ -37,8 +37,13 @@ Simply write title in quotes, time and date. For example:
 ```
 
 ### Formats
-Allowed time formats: `hh:mm`, `h:mm`, `hh:`
+Allowed time formats: `hh:mm`, `h:mm`, `hh:`.
 
-Allowed time period: `hh:mm - hh:mm`, `hh:mm-hh:mm`, `hh:mm hh:mm`
+Allowed time period: `hh:mm - hh:mm`, `hh:mm-hh:mm`, `hh:mm hh:mm`.
 
-Allowed date formats: `dd.mm.yy`, `dd.mm.yyyy`, `dd.mm`
+Allowed date formats: `dd.mm.yy`, `dd.mm.yyyy`, `dd.mm`.
+
+### Aliases
+
+- `tomorrow` - set tomorrow date.
+- `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday` - next week day.

@@ -1,6 +1,23 @@
-type Time = {
-  start: Date,
-  end: Date,
+import { dateGenerator } from './date-generator'
+
+const createNotInQuotesRegex = (target: string) => {
+  return new RegExp(`(${target})(?=(?:[^"]|"[^"]*")*$)`, 'g')
+}
+
+const normalizeString = (str: string) => {
+  // Lowercase all symbols except in quotes.
+  let newStr = str.replaceAll(createNotInQuotesRegex('\\w*'), (s) => s.toLowerCase())
+
+  newStr = newStr.replaceAll(createNotInQuotesRegex('tomorrow'), dateGenerator.tomorrow().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('monday'), dateGenerator.monday().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('tuesday'), dateGenerator.tuesday().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('wednesday'), dateGenerator.wednesday().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('thursday'), dateGenerator.thursday().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('friday'), dateGenerator.friday().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('saturday'), dateGenerator.saturday().toLocaleDateString('ru'))
+  newStr = newStr.replaceAll(createNotInQuotesRegex('sunday'), dateGenerator.sunday().toLocaleDateString('ru'))
+
+  return newStr
 }
 
 const parseTitle = (str: string) => {
@@ -77,10 +94,14 @@ const parseNote = (str: string) => {
 
 /** TODO: Rename to parse line */
 export const parseEvent = (str: string) => {
+  const normStr = normalizeString(str)
+
+  console.log(normStr)
+
   return { 
-    summary: parseTitle(str),
-    ...parseTime(str),
-    repeat: parseRepeat(str),
-    description: parseNote(str)
+    summary: parseTitle(normStr),
+    ...parseTime(normStr),
+    repeat: parseRepeat(normStr),
+    description: parseNote(normStr)
   }
 }
