@@ -2,8 +2,8 @@
   <div class="select">
     <select @change="onChange">
       <option
-        v-for="o in options"
-        :key="o[textKey]"
+        v-for="(o, index) in options"
+        :key="o[textKey] + index"
         :selected="o[valueKey] == value"
         :value="o[valueKey]"
       >
