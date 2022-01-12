@@ -1,11 +1,11 @@
 <template>
   <MyCard>
-    <MyTabs :tabs="[{ name: 'old', text: 'Legacy' }, { name: 'new', text: 'New' }]">
+    <MyTabs v-model="activeTab" :tabs="[{ name: 'old', text: 'Legacy' }, { name: 'new', text: 'New' }]">
       <template #old>
         <LegacyCreateEvent />
       </template>
       <template #new>
-        legacy
+        <NewCreateEvent />
       </template>
     </MyTabs>
   </MyCard>
@@ -15,13 +15,18 @@
 import MyCard from "../components/base/MyCard.vue";
 import MyTabs from '../components/base/MyTabs.vue'
 import LegacyCreateEvent from '../components/createEvent/Legacy.vue'
+import NewCreateEvent from '../components/createEvent/New.vue'
 
 export default {
   name: "CreateEventView",
 
   pageSubtitle: 'Create Event',
 
-  components: { MyCard,  MyTabs, LegacyCreateEvent },
+  components: { MyCard,  MyTabs, LegacyCreateEvent, NewCreateEvent },
+
+  data() {
+    return { activeTab: 1, }
+  }
 };
 </script>
 

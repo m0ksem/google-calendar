@@ -40,7 +40,7 @@ export default {
       return this.tabs.map((tab) => typeof tab === 'string' ? createTab(tab) : tab) 
     },
     activeTab() {
-      return this.tabs[this.value] || this.tabs[this.innerValue]
+      return this.tabs[this.innerValue]
     }
   },
 
@@ -52,7 +52,10 @@ export default {
   },
 
   watch: {
-    value(newValue) { this.innerValue = newValue }
+    value: {
+      handler(newValue) { this.innerValue = newValue; },
+      immediate: true,
+    }
   }
 }
 </script>
