@@ -8,6 +8,7 @@ const normalizeString = (str: string) => {
   // Lowercase all symbols except in quotes.
   let newStr = str.replaceAll(createNotInQuotesRegex('\\w*'), (s) => s.toLowerCase())
 
+  newStr = newStr.replaceAll(createNotInQuotesRegex('today'), dateGenerator.today().toLocaleDateString('ru'))
   newStr = newStr.replaceAll(createNotInQuotesRegex('tomorrow'), dateGenerator.tomorrow().toLocaleDateString('ru'))
   newStr = newStr.replaceAll(createNotInQuotesRegex('monday'), dateGenerator.monday().toLocaleDateString('ru'))
   newStr = newStr.replaceAll(createNotInQuotesRegex('tuesday'), dateGenerator.tuesday().toLocaleDateString('ru'))
@@ -21,7 +22,7 @@ const normalizeString = (str: string) => {
 }
 
 const parseTitle = (str: string) => {
-  const [title] = str.match(/"[\w|\s]*"/g) || []
+  const [title] = str.match(/"[\w|\s|[\p{Cyrillic}]*"/) || []
 
   if (!title) { return null }
 
