@@ -18,6 +18,7 @@ export const dateGenerator = {
     return date
   },
 
+  today: () => new Date(),
   sunday: () => getNextWeekDay(0),
   monday: () => getNextWeekDay(1),
   tuesday: () => getNextWeekDay(2),
