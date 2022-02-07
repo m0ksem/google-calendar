@@ -22,7 +22,7 @@ const normalizeString = (str: string) => {
 }
 
 const parseTitle = (str: string) => {
-  const [title] = str.match(/"([\w|\s|[а-я]|[,.])*"/ui) || []
+  const [title] = str.match(/"([\w|\s|[а-я]|[,.]|\p{sc=Cyrillic})*"/ui) || []
 
   if (!title) { return null }
 
@@ -81,6 +81,7 @@ const parseTime = (str: string) => {
 const periods = ["secondly", "minutely", "hourly", "daily", "weekly", "monthly", "yearly"]
 
 const parseRepeat = (str: string) => {
+  console.log(str)
   const startIndex = str.toLowerCase().indexOf('repeat')
 
   const words = str.slice(startIndex).toLowerCase().split(' ')

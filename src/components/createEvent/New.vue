@@ -68,7 +68,7 @@ export default {
 
   methods: {
     createEvents() {
-      const eventTexts = this.textareaValue.split('\n\n\n')
+      const eventTexts = this.textareaValue.split('\n')
 
       const events = eventTexts.map((text) => this.createEvent(text))
 
@@ -76,7 +76,7 @@ export default {
     },
 
     createEvent(text) {
-      return parseEvent(text)
+      return parseEvent(text)    
     },
 
     async ButtonClick() {
