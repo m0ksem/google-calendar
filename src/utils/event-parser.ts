@@ -22,7 +22,7 @@ const normalizeString = (str: string) => {
 }
 
 const parseTitle = (str: string) => {
-  const [title] = str.match(/"[\w|\s|[\p{Cyrillic}]*"/) || []
+  const [title] = str.match(/"([\w|\s|[а-я]|[,.])*"/ui) || []
 
   if (!title) { return null }
 
@@ -48,14 +48,29 @@ const createDate = (date: string, time: string) => {
   return new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes));
 }
 
+const parseDate = (str: string): string => {
+  const matchResult = str.match(/(\w*\s)?((\d{1,2})\.(\d{1,2})(?:\.(\d{2,4})){0,1})/)
+
+  if (matchResult) {
+    const [wholeString, wordBefore, dateStr] = matchResult
+
+    // Ignore until date, we need event date here
+    if (wordBefore.trim() !== 'until') {
+      return dateStr
+    }    
+  }
+
+  return dateGenerator.today().toLocaleDateString('ru')
+}
+
 const parseTime = (str: string) => {
   const times = str.match(/\d{1,2}:\d{0,2}/g)
-  const date = str.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4})){0,1}/g)
+  const date = parseDate(str)
 
-  if (!times || !date) return null
+  if (!times) return null
 
-  const start = { dateTime: createDate(date[0], times[0]) }
-  const end = times[1] && { dateTime: createDate(date[0], times[1]) }
+  const start = { dateTime: createDate(date, times[0]) }
+  const end = times[1] && { dateTime: createDate(date, times[1]) }
 
   return {
     start,
